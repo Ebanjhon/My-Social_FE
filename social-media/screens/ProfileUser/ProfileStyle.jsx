@@ -4,8 +4,8 @@ import colors from '../../assets/color/colors';
 const styles = StyleSheet.create({
     container: {
         height: '100%',
-        width: '100%',
-        alignItems: 'center'
+        width: 'auto',
+        alignItems: 'center',
     },
     contai_avatar: {
         height: 140,
@@ -63,6 +63,15 @@ const styles = StyleSheet.create({
     contai_item_flow: {
         alignItems: 'center',
         width: 100,
+    },
+    contai_tab_view: {
+        backgroundColor: colors.success
+    },
+    scene: {
+        // backgroundColor: colors.danger,
+        height: '100%',
+        width: '100%',
+        padding: 5
     }
 });
 
