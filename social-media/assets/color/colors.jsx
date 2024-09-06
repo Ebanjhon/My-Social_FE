@@ -14,6 +14,8 @@ const colors = {
     xamnhe: '#CAC8D4',
     gray: '#A3A5A5',
     xamtrang: '#E0E0E0',
+    background: '#F0F4F7',
+
 };
 
 export default colors;
