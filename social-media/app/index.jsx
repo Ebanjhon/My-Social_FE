@@ -19,6 +19,7 @@ import Notification from '../screens/Notification/Notification';
 import Post from '../screens/Post/Post';
 import Icon from 'react-native-vector-icons/Ionicons'
 import UserSeting from '../screens/ProfileUser/UserSetting';
+import MyStyle from '../components/style';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -137,14 +138,12 @@ function UserProfile() {
                     },
                     title: 'Cài đặt',
                     headerTitleAlign: 'center',
-                    headerTitleStyle: {
-                        marginBottom: 0,
-                        fontSize: 20,
-                    },
+                    headerTitleStyle: MyStyle.title_top_screen,
                     headerLeft: () => (
-                        <View style={{ height: '100%', marginBottom: 0 }}>
-                            <TouchableOpacity onPress={() => navigation.navigate('ProfileDetail')}>
-                                <Icon name="chevron-back" size={27} color={colors.black} />
+                        <View style={{ height: '100%' }}>
+                            <TouchableOpacity style={{ display: 'flex', flexDirection: 'row' }} onPress={() => navigation.navigate('ProfileDetail')}>
+                                <Icon name="chevron-back" size={27} color={colors.black} style={{ lineHeight: 23 }} />
+                                <Text style={{ fontSize: 20, lineHeight: 22 }}>Quay lại</Text>
                             </TouchableOpacity>
                         </View>
                     ),
@@ -157,14 +156,11 @@ function UserProfile() {
                     },
                     title: 'Trang cá nhân',
                     headerTitleAlign: 'center',
-                    headerTitleStyle: {
-                        marginBottom: 0,
-                        fontSize: 20,
-                    },
+                    headerTitleStyle: MyStyle.title_top_screen,
                     headerRight: () => (
                         <View style={{ height: '100%', marginBottom: 0 }}>
                             <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
-                                <Icon name="menu" size={27} color={colors.black} style={{ marginRight: 10 }} />
+                                <Icon name="menu" size={27} color={colors.black} style={{ marginRight: 10, lineHeight: 26 }} />
                             </TouchableOpacity>
                         </View>
                     ),

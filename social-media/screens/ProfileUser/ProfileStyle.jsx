@@ -72,7 +72,20 @@ const styles = StyleSheet.create({
         height: '100%',
         width: '100%',
         padding: 5
-    }
+    },
+    contai_edit_avata: {
+        width: "auto",
+        height: "auto",
+        padding: 4,
+        position: 'absolute',
+        left: 10,
+        top: 5,
+        borderRadius: 5,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        borderColor: colors.gray
+    },
+
 });
 
 export default styles;

@@ -1,8 +1,9 @@
 import React from 'react';
-import { Image, Text, View, Dimensions, ScrollView } from 'react-native';
+import { Image, Text, View, Dimensions, ScrollView, TouchableHighlight, TouchableHighlightComponent, TouchableHighlightBase, TouchableOpacity } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import styles from './ProfileStyle';
 import colors from '../../assets/color/colors';
+import icons from '../../assets/iconApp/icons';
 
 const ProfileUser = ({ navigation }) => {
 
@@ -79,6 +80,10 @@ const ProfileUser = ({ navigation }) => {
                         style={styles.avatar}
                         source={{ uri: 'https://i.pinimg.com/236x/7e/33/83/7e338326ed695ec0ccc28283ce81378b.jpg' }} />
                 </View>
+
+                <TouchableOpacity style={styles.contai_edit_avata}>
+                    <Text style={{ fontSize: 13 }}>Update avatar <Image style={{ width: 10, height: 10 }} source={{ uri: icons.edit }} /></Text>
+                </TouchableOpacity>
 
                 <View style={styles.contai_name}>
                     <Text style={styles.full_name}>Êban Jhon Y</Text>

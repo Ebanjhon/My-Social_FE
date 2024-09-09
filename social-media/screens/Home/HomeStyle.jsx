@@ -12,8 +12,7 @@ const styles = StyleSheet.create({
     },
     contai_head: {
         width: '100%',
-        height: 65,
-        // backgroundColor: colors.info,
+        height: 60,
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-around',
@@ -103,6 +102,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 20,
         marginLeft: 10
+    },
+    line_border: {
+        width: '95%',
+        borderRadius: 20,
+        borderWidth: 1.2,
+        borderColor: colors.xamnhe,
+        marginBottom: 10
     }
 });
 
