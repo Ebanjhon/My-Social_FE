@@ -1544,11 +1544,6 @@
   dependencies:
     merge-options "^3.0.4"
 
-"@react-native-community/blur@^4.4.1":
-  version "4.4.1"
-  resolved "https://registry.npmjs.org/@react-native-community/blur/-/blur-4.4.1.tgz"
-  integrity sha512-XBSsRiYxE/MOEln2ayunShfJtWztHwUxLFcSL20o+HNNRnuUDv+GXkF6FmM2zE8ZUfrnhQ/zeTqvnuDPGw6O8A==
-
 "@react-native-community/cli-clean@13.6.9":
   version "13.6.9"
   resolved "https://registry.npmjs.org/@react-native-community/cli-clean/-/cli-clean-13.6.9.tgz"
@@ -6801,6 +6796,13 @@ rc@~1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-addons-shallow-compare@latest:
+  version "15.6.3"
+  resolved "https://registry.npmjs.org/react-addons-shallow-compare/-/react-addons-shallow-compare-15.6.3.tgz"
+  integrity sha512-EDJbgKTtGRLhr3wiGDXK/+AEJ59yqGS+tKE6mue0aNXT6ZMR7VJbbzIiT6akotmHg1BLj46ElJSb+NBMp80XBg==
+  dependencies:
+    object-assign "^4.1.0"
+
 react-cookies@^0.1.1:
   version "0.1.1"
   resolved "https://registry.npmjs.org/react-cookies/-/react-cookies-0.1.1.tgz"
@@ -6911,6 +6913,13 @@ react-native-screens@^3.31.1:
   dependencies:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
+
+react-native-snap-carousel@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.npmjs.org/react-native-snap-carousel/-/react-native-snap-carousel-1.6.1.tgz"
+  integrity sha512-0epbcc8im9oLJDnsMvpz5aebSPszyDakSWt7vSNqFpux4yg2kTKlw7ZGVn415nCLEv1XiKjHBHvIhs0oVeAgjQ==
+  dependencies:
+    react-addons-shallow-compare latest
 
 react-native-tab-view@^3.5.2:
   version "3.5.2"

@@ -1,7 +1,8 @@
-import { KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, View } from "react-native";
+import { Image, KeyboardAvoidingView, Platform, ScrollView, Text, TextInput, TouchableOpacity, View } from "react-native";
 import TabHeader from "../../components/TabHeader";
 import { useState } from "react";
 import styles from "./SearchStyle";
+import MyStyle from "../../components/style";
 import colors from "../../assets/color/colors";
 const Search = () => {
     const title = "Tìm kiếm";
@@ -9,11 +10,8 @@ const Search = () => {
     return (
         <View style={styles.container}>
             <TabHeader title={title} />
-
-            <KeyboardAvoidingView
-                behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-                keyboardVerticalOffset={60}>
-                <ScrollView>
+            <ScrollView style={{ width: '100%' }}>
+                <View style={{ width: '100%', alignItems: 'center' }}>
                     <View style={styles.contai_search}>
                         <TextInput
                             style={{ fontSize: 19 }}
@@ -21,8 +19,129 @@ const Search = () => {
                             multiline={true} // Cho phép nhập nhiều dòng
                         />
                     </View>
-                </ScrollView>
-            </KeyboardAvoidingView>
+                </View>
+
+                <View style={styles.item_notifi}>
+                    <Image
+                        style={styles.image_avatar}
+                        source={{ uri: 'https://i.pinimg.com/564x/7d/2d/c5/7d2dc513fc506bd9ad6cf3847b7326c2.jpg' }} />
+                    <View>
+                        <Text style={MyStyle.fullname}>YJhone EBan</Text>
+                        <Text>@jhonEban - Có 100 người theo giỏi</Text>
+                    </View>
+                </View>
+
+                <View style={styles.item_notifi}>
+                    <Image
+                        style={styles.image_avatar}
+                        source={{ uri: 'https://i.pinimg.com/564x/7d/2d/c5/7d2dc513fc506bd9ad6cf3847b7326c2.jpg' }} />
+                    <View>
+                        <Text style={MyStyle.fullname}>YJhone EBan</Text>
+                        <Text>@jhonEban - Có 100 người theo giỏi</Text>
+                    </View>
+                </View>
+
+                <View style={styles.item_notifi}>
+                    <Image
+                        style={styles.image_avatar}
+                        source={{ uri: 'https://i.pinimg.com/564x/7d/2d/c5/7d2dc513fc506bd9ad6cf3847b7326c2.jpg' }} />
+                    <View>
+                        <Text style={MyStyle.fullname}>YJhone EBan</Text>
+                        <Text>@jhonEban - Có 100 người theo giỏi</Text>
+                    </View>
+                </View>
+
+                <View style={styles.item_notifi}>
+                    <Image
+                        style={styles.image_avatar}
+                        source={{ uri: 'https://i.pinimg.com/564x/7d/2d/c5/7d2dc513fc506bd9ad6cf3847b7326c2.jpg' }} />
+                    <View>
+                        <Text style={MyStyle.fullname}>YJhone EBan</Text>
+                        <Text>@jhonEban - Có 100 người theo giỏi</Text>
+                    </View>
+                </View>
+
+                <View style={styles.item_notifi}>
+                    <Image
+                        style={styles.image_avatar}
+                        source={{ uri: 'https://i.pinimg.com/564x/7d/2d/c5/7d2dc513fc506bd9ad6cf3847b7326c2.jpg' }} />
+                    <View>
+                        <Text style={MyStyle.fullname}>YJhone EBan</Text>
+                        <Text>@jhonEban - Có 100 người theo giỏi</Text>
+                    </View>
+                </View>
+
+                <View style={styles.item_notifi}>
+                    <Image
+                        style={styles.image_avatar}
+                        source={{ uri: 'https://i.pinimg.com/564x/7d/2d/c5/7d2dc513fc506bd9ad6cf3847b7326c2.jpg' }} />
+                    <View>
+                        <Text style={MyStyle.fullname}>YJhone EBan</Text>
+                        <Text>@jhonEban - Có 100 người theo giỏi</Text>
+                    </View>
+                </View>
+
+                <View style={styles.item_notifi}>
+                    <Image
+                        style={styles.image_avatar}
+                        source={{ uri: 'https://i.pinimg.com/564x/7d/2d/c5/7d2dc513fc506bd9ad6cf3847b7326c2.jpg' }} />
+                    <View>
+                        <Text style={MyStyle.fullname}>YJhone EBan</Text>
+                        <Text>@jhonEban - Có 100 người theo giỏi</Text>
+                    </View>
+                </View>
+
+                <View style={styles.item_notifi}>
+                    <Image
+                        style={styles.image_avatar}
+                        source={{ uri: 'https://i.pinimg.com/564x/7d/2d/c5/7d2dc513fc506bd9ad6cf3847b7326c2.jpg' }} />
+                    <View>
+                        <Text style={MyStyle.fullname}>YJhone EBan</Text>
+                        <Text>@jhonEban - Có 100 người theo giỏi</Text>
+                    </View>
+                </View>
+
+                <View style={styles.item_notifi}>
+                    <Image
+                        style={styles.image_avatar}
+                        source={{ uri: 'https://i.pinimg.com/564x/7d/2d/c5/7d2dc513fc506bd9ad6cf3847b7326c2.jpg' }} />
+                    <View>
+                        <Text style={MyStyle.fullname}>YJhone EBan</Text>
+                        <Text>@jhonEban - Có 100 người theo giỏi</Text>
+                    </View>
+                </View>
+
+                <View style={styles.item_notifi}>
+                    <Image
+                        style={styles.image_avatar}
+                        source={{ uri: 'https://i.pinimg.com/564x/7d/2d/c5/7d2dc513fc506bd9ad6cf3847b7326c2.jpg' }} />
+                    <View>
+                        <Text style={MyStyle.fullname}>YJhone EBan</Text>
+                        <Text>@jhonEban - Có 100 người theo giỏi</Text>
+                    </View>
+                </View>
+
+                <View style={styles.item_notifi}>
+                    <Image
+                        style={styles.image_avatar}
+                        source={{ uri: 'https://i.pinimg.com/564x/7d/2d/c5/7d2dc513fc506bd9ad6cf3847b7326c2.jpg' }} />
+                    <View>
+                        <Text style={MyStyle.fullname}>YJhone EBan</Text>
+                        <Text>@jhonEban - Có 100 người theo giỏi</Text>
+                    </View>
+                </View>
+
+                <View style={styles.item_notifi}>
+                    <Image
+                        style={styles.image_avatar}
+                        source={{ uri: 'https://i.pinimg.com/564x/7d/2d/c5/7d2dc513fc506bd9ad6cf3847b7326c2.jpg' }} />
+                    <View>
+                        <Text style={MyStyle.fullname}>YJhone EBan</Text>
+                        <Text>@jhonEban - Có 100 người theo giỏi</Text>
+                    </View>
+                </View>
+
+            </ScrollView>
         </View>
     )
 };

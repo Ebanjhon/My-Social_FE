@@ -1,26 +1,64 @@
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import TabHeader from "../../components/TabHeader";
 import colors from "../../assets/color/colors";
 import icons from "../../assets/iconApp/icons";
+import styles from "./NotifiStyle";
 
 const Notification = () => {
     const title = 'Thông báo';
     return (
-        <View>
+        <SafeAreaView style={styles.container}>
             <TabHeader title={title} />
-        </View>
+            <ScrollView>
+                <View style={styles.item_contai}>
+                    <TouchableOpacity style={styles.item_notifi}>
+
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.item_notifi}>
+
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.item_notifi}>
+
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.item_notifi}>
+
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.item_notifi}>
+
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.item_notifi}>
+
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.item_notifi}>
+
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.item_notifi}>
+
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.item_notifi}>
+
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.item_notifi}>
+
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.item_notifi}>
+
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
+        </SafeAreaView>
     );
 };
 
-const styles = StyleSheet.create({
-    contai_header: {
-        width: '100%',
-        height: 50,
-        backgroundColor: colors.danger,
-        display: 'flex',
-        justifyContent: 'space-around',
-        alignContent: 'center'
-    }
-});
 
 export default Notification

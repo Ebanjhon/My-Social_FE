@@ -19,9 +19,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     contain: {
-        width: '100%',
+        width: '96%',
         alignItems: 'center',
-        // backgroundColor: colors.danger
+        backgroundColor: colors.white,
+        borderRadius: 20,
+        paddingTop: 10,
+        elevation: 5,
+        marginBottom: 10
     },
     txt_post: {
         fontSize: 20,
@@ -44,13 +48,10 @@ const styles = StyleSheet.create({
     message: {
         width: 70,
         alignItems: 'center'
-        // backgroundColor: colors.gray
     },
     post_contain: {
-        width: '95%',
-        height: 450,
-        // backgroundColor: colors.danger,
-        borderRadius: 15,
+        width: '100%',
+        height: 390,
         overflow: 'hidden',
         marginBottom: 10,
         position: 'relative',
@@ -63,31 +64,30 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         position: 'absolute',
-        bottom: 15,
-        right: 15,
+        bottom: 0,
+        right: 25,
         borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: colors.white
+        flexDirection: 'row'
         // backgroundColor: 'rgba(255, 255, 255, 0.9)',
     },
     btn_cmt: {
         width: 50,
         height: 50,
         position: 'absolute',
-        bottom: 15,
+        bottom: 0,
         left: 15,
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'rgba(255, 255, 255, 0.9)',
-        // backgroundColor: colors.white
     },
     btn_share: {
         width: 80,
         height: 50,
         position: 'absolute',
-        bottom: 15,
+        bottom: 0,
         left: 80,
         borderRadius: 30,
         justifyContent: 'center',
@@ -109,6 +109,28 @@ const styles = StyleSheet.create({
         borderWidth: 1.2,
         borderColor: colors.xamnhe,
         marginBottom: 10
+    },
+
+    container_view: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: 500,
+        backgroundColor: colors.danger
+    },
+    imageContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    image: {
+        width: 250,
+        height: 330,
+        margin: 10,
+    },
+    contai_image: {
+        width: '100%',
+        // backgroundColor: colors.gold
     }
 });
 

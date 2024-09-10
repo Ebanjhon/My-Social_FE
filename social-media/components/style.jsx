@@ -7,6 +7,10 @@ const MyStyle = StyleSheet.create({
         marginBottom: 0,
         fontSize: 20,
         lineHeight: 23,
+    },
+    fullname: {
+        fontSize: 18,
+        color: colors.black
     }
 });
 
