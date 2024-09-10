@@ -15,6 +15,7 @@ const colors = {
     gray: '#A3A5A5',
     xamtrang: '#E0E0E0',
     background: '#F0F4F7',
+    xam: '#696969',
 
 };
 

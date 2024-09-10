@@ -42,7 +42,7 @@ function HomeTabs() {
                 headerShown: false,
                 tabBarShowLabel: false,
                 // tabBarIconStyle: { display: 'none' },
-                tabBarStyle: styles.tabBarStyle
+                tabBarStyle: styles.tabBarStyle,
             }}>
             <Tab.Screen name="Home" component={Home} options={{
                 tabBarIcon: ({ focused }) => (
@@ -76,7 +76,9 @@ function HomeTabs() {
                 ),
             }} />
 
+            {/* Ẩn Tab Bar khi vào màn hình Post */}
             <Tab.Screen name="Post" component={Post} options={{
+                tabBarStyle: { display: 'none' },// ẩn navigation
                 tabBarIcon: ({ focused }) => (
                     <View style={{
                         alignItems: 'center',
@@ -195,7 +197,9 @@ const Index = () => {
     return (
         <NavigationContainer independent={true}>
             <UserContext.Provider value={[user, useDispatch]}>
-                <Stack.Navigator initialRouteName="Intro" screenOptions={{ headerShown: false }}>
+                <Stack.Navigator
+                    initialRouteName="Intro"
+                    screenOptions={{ headerShown: false }}>
                     {!user == null ? (<>
                         <Stack.Screen name="Intro" component={IntroApp} />
                         <Stack.Screen name="Login" component={Login} />

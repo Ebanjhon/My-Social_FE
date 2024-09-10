@@ -12,10 +12,11 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         height: 60,
         elevation: 0,
+
     }, tabBarIconText: {
         alignItems: 'center',
         justifyContent: 'center',
-        top: '10'
+        top: '10',
     },
     icon: {
         width: 40,
