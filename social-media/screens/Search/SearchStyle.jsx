@@ -8,13 +8,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     contai_search: {
-        width: 300,
-        height: 30,
+        width: 320,
+        height: 35,
         backgroundColor: colors.xamtrang,
         borderRadius: 20,
         paddingLeft: 10,
         marginTop: 5,
-
+        justifyContent: 'center'
     }
 
 });
