@@ -1,20 +1,26 @@
-import { Button, Image, Text, View } from "react-native";
+import { Button, Image, Text, TouchableOpacity, View } from "react-native";
 import { StyleSheet } from "react-native";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import colors from '../../assets/color/colors';
-import { FiLogOut } from "react-icons/fi";
 
 const UserSeting = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.box}>
-
-            </View>
-            <View style={styles.box}>
-
+                <Text style={styles.title_box}>Trung tâm tài khoản</Text>
+                <TouchableOpacity>
+                    <Text style={styles.itemp}>Chỉnh sửa thông tin cá nhân</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Text style={styles.itemp}>Thay đổi mật khẩu</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Text style={styles.itemp}>Quyền riêng tư</Text>
+                </TouchableOpacity>
             </View>
 
             <View style={[styles.box, styles.box_bottom]}>
+                <Text style={styles.title_box}>Trung tâm tài khoản</Text>
                 <Text
                     style={styles.text_login}
                     onPress={() => navigation.navigate('Logout')}>
@@ -41,9 +47,10 @@ const styles = StyleSheet.create({
     },
     box: {
         width: "97%",
-        height: 90,
+        height: 'auto',
         backgroundColor: colors.white,
         marginTop: 7,
+        padding: 10,
         borderRadius: 7,
         shadowColor: '#000',        // Màu sắc của bóng
         shadowOffset: { width: 5, height: 5 },  // Độ dịch chuyển của bóng
@@ -52,17 +59,32 @@ const styles = StyleSheet.create({
         elevation: 5,               // Đối với Android: độ cao của bóng
     },
     box_bottom: {
-        justifyContent: 'center',
-        alignItems: 'center'
+
     },
     text_logout: {
         fontSize: 30,
         fontWeight: '700',
-        color: colors.danger
+        color: colors.danger,
+        width: '100%',
+        textAlign: 'center'
     },
     text_login: {
         fontSize: 20,
-        color: colors.info
+        color: colors.info,
+        textAlign: 'center',
+        margin: 5
+    },
+    title_box: {
+        fontSize: 20,
+        fontWeight: '600',
+        color: colors.gray,
+
+    },
+    itemp: {
+        fontSize: 18,
+        fontWeight: '500',
+        color: colors.dark,
+        marginTop: 7
     }
 
 

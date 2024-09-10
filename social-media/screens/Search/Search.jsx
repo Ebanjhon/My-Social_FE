@@ -1,11 +1,13 @@
-import { Text, View } from "react-native";
-
+import { ScrollView, Text, View } from "react-native";
+import TabHeader from "../../components/TabHeader";
 const Search = () => {
+    const title = "Tìm kiếm";
     return (
         <View>
-            <Text>
-                Tìm kiếm
-            </Text>
+            <TabHeader title={title} />
+            <ScrollView>
+                <Text>sdfsdf</Text>
+            </ScrollView>
         </View>
     )
 };

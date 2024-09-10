@@ -94,20 +94,22 @@ function HomeTabs() {
                 ),
             }} />
 
-            <Tab.Screen name="Notification" component={Notification} options={{
-                tabBarIcon: ({ focused }) => (
-                    <View style={styles.tabBarIconText}>
-                        <Image
-                            source={Images.notifi}
-                            resizeMode='contain'
-                            style={[
-                                { tintColor: focused ? colors.gold : colors.secondary },
-                                styles.icon
-                            ]}
-                        />
-                    </View>
-                ),
-            }} />
+            <Tab.Screen name="Notification" component={Notification}
+                options={{
+                    tabBarIcon: ({ focused }) => (
+                        <View style={styles.tabBarIconText}>
+                            <Image
+                                source={Images.notifi}
+                                resizeMode='contain'
+                                style={[
+                                    { tintColor: focused ? colors.gold : colors.secondary },
+                                    styles.icon
+                                ]}
+                            />
+                        </View>
+                    ),
+                }}
+            />
 
             <Tab.Screen name="Profile" component={UserProfile} options={{
                 tabBarIcon: ({ focused }) => (
@@ -160,7 +162,7 @@ function UserProfile() {
                     headerRight: () => (
                         <View style={{ height: '100%', marginBottom: 0 }}>
                             <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
-                                <Icon name="menu" size={27} color={colors.black} style={{ marginRight: 10, lineHeight: 26 }} />
+                                <Icon name="menu" size={30} color={colors.black} style={{ marginRight: 10, lineHeight: 26 }} />
                             </TouchableOpacity>
                         </View>
                     ),

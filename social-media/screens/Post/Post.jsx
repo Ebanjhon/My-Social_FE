@@ -1,11 +1,12 @@
 import { Text, View } from "react-native";
+import styles from "./PostStyle";
 
 const Post = () => {
     return (
-        <View>
-            <Text>
-                Post
-            </Text>
+        <View style={styles.contai_post}>
+            <View>
+
+            </View>
         </View>
     )
 };

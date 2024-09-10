@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, Text, View, Dimensions, ScrollView, TouchableHighlight, TouchableHighlightComponent, TouchableHighlightBase, TouchableOpacity } from 'react-native';
 import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
 import styles from './ProfileStyle';
 import colors from '../../assets/color/colors';
 import icons from '../../assets/iconApp/icons';
+import * as ImagePicker from 'expo-image-picker';
 
 const ProfileUser = ({ navigation }) => {
+
+    const [image, setImage] = useState(null);
 
     const PostRoute = () => (
         <View style={styles.scene}>
@@ -72,6 +75,23 @@ const ProfileUser = ({ navigation }) => {
         />
     );
 
+    const pickImage = async () => {
+        // No permissions request is necessary for launching the image library
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [1, 1], // chỉnh tỷ lệ hình ảnh
+            quality: 1, //chất lượng ảnh
+        });
+
+        console.log(result);
+
+        if (!result.canceled) {
+            setImage(result.assets[0].uri);
+        }
+    };
+
+
     return (
         <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.container}>
@@ -81,7 +101,7 @@ const ProfileUser = ({ navigation }) => {
                         source={{ uri: 'https://i.pinimg.com/236x/7e/33/83/7e338326ed695ec0ccc28283ce81378b.jpg' }} />
                 </View>
 
-                <TouchableOpacity style={styles.contai_edit_avata}>
+                <TouchableOpacity style={styles.contai_edit_avata} onPress={pickImage}>
                     <Text style={{ fontSize: 13 }}>Update avatar <Image style={{ width: 10, height: 10 }} source={{ uri: icons.edit }} /></Text>
                 </TouchableOpacity>
 
