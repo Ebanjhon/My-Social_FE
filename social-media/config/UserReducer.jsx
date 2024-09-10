@@ -12,9 +12,3 @@ const UserReducer = (user, action) => {
 }
 
 export default UserReducer
-
-// Lấy thông tin user
-// const userData = JSON.parse(await AsyncStorage.getItem('user'));
-
-// // Xóa dữ liệu
-// await AsyncStorage.removeItem('user');

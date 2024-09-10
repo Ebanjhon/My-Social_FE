@@ -20,6 +20,7 @@ import Post from '../screens/Post/Post';
 import Icon from 'react-native-vector-icons/Ionicons'
 import UserSeting from '../screens/ProfileUser/UserSetting';
 import MyStyle from '../components/style';
+import { TabBarProvider, useTabBar } from '../config/TabBarContext';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -35,15 +36,19 @@ const Images = {
 
 
 function HomeTabs() {
-
+    const { state } = useTabBar();
     return (
         <Tab.Navigator
             screenOptions={{
                 headerShown: false,
                 tabBarShowLabel: false,
-                // tabBarIconStyle: { display: 'none' },
-                tabBarStyle: styles.tabBarStyle,
-            }}>
+                tabBarStyle: {
+                    ...styles.tabBarStyle, // Giữ các style hiện tại
+                    display: state.visible ? 'flex' : 'none', // Hiển thị hoặc ẩn TabBar dựa trên trạng thái
+                },
+            }}
+        >
+
             <Tab.Screen name="Home" component={Home} options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={styles.tabBarIconText}>
@@ -197,18 +202,20 @@ const Index = () => {
     return (
         <NavigationContainer independent={true}>
             <UserContext.Provider value={[user, useDispatch]}>
-                <Stack.Navigator
-                    initialRouteName="Intro"
-                    screenOptions={{ headerShown: false }}>
-                    {!user == null ? (<>
-                        <Stack.Screen name="Intro" component={IntroApp} />
-                        <Stack.Screen name="Login" component={Login} />
-                        <Stack.Screen name="Register" component={Register} />
-                    </>) : (<>
-                        <Stack.Screen name="HomeTabs" component={HomeTabs} />
-                        <Stack.Screen name="Logout" component={Logout} />
-                    </>)}
-                </Stack.Navigator>
+                <TabBarProvider>
+                    <Stack.Navigator
+                        initialRouteName="Intro"
+                        screenOptions={{ headerShown: false }}>
+                        {!user == null ? (<>
+                            <Stack.Screen name="Intro" component={IntroApp} />
+                            <Stack.Screen name="Login" component={Login} />
+                            <Stack.Screen name="Register" component={Register} />
+                        </>) : (<>
+                            <Stack.Screen name="HomeTabs" component={HomeTabs} />
+                            <Stack.Screen name="Logout" component={Logout} />
+                        </>)}
+                    </Stack.Navigator>
+                </TabBarProvider>
             </UserContext.Provider>
         </NavigationContainer >
     );
