@@ -127,14 +127,14 @@ const ProfileUser = ({ navigation }) => {
                         <Text style={styles.content}>Following</Text>
                     </View>
                 </View>
-                <TabView
+                {/* <TabView
                     style={{ width: '100%', minHeight: 600 }}
                     navigationState={{ index, routes }}
                     renderScene={renderScene}
                     onIndexChange={setIndex}
                     initialLayout={{ width: Dimensions.get('window').width }}
                     renderTabBar={renderTabBar}
-                />
+                /> */}
             </View>
         </ScrollView>
     );
