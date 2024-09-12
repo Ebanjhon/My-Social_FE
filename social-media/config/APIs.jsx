@@ -11,11 +11,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // Xóa token
 // await AsyncStorage.removeItem('token');
 
-export const HOST = 'http://192.168.1.28:8080';
+export const HOST = 'http://10.0.2.2:8080';
 
 export const endpoints = {
-    'login': '/auth/login',
-    'current-user': '/api/curent-user',
+    'login': '/api/login',
+    'current-user': '/api/users/curent',
 
 }
 

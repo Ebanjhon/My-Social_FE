@@ -1,5 +1,5 @@
 import React, { Component, useContext, useState } from 'react'
-import { Button, KeyboardAvoidingView, Platform, Text, View } from 'react-native'
+import { Alert, Button, KeyboardAvoidingView, Platform, Text, View } from 'react-native'
 import styles from './LoginStyle';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import APIs, { apiWithoutAuth, authApi, endpoints } from '../../config/APIs';
@@ -11,7 +11,6 @@ const Login = ({ navigation }) => {
     const [password, setPassword] = useState('');
     const [userCurrent, dispatch] = useContext(UserContext);
 
-
     const loginPress = async () => {
         try {
             // Gọi API để đăng nhập
@@ -22,13 +21,12 @@ const Login = ({ navigation }) => {
 
             if (response.status === 200) {
                 // Lưu token vào AsyncStorage
-                await AsyncStorage.setItem('token', response.data.token);
+                await AsyncStorage.setItem('token', response.data.jwtToken);
 
                 // Lấy token từ AsyncStorage và gọi API để lấy thông tin người dùng
                 const api = await authApi(); // Đợi authApi hoàn thành và lấy instance axios
                 const userResponse = await api.get(endpoints['current-user']);
 
-                console.log(userResponse.data);
                 // Cập nhật trạng thái ứng dụng
                 dispatch({
                     type: 'login',

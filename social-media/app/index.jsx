@@ -206,7 +206,7 @@ const Index = () => {
                     <Stack.Navigator
                         initialRouteName="Intro"
                         screenOptions={{ headerShown: false }}>
-                        {!user == null ? (<>
+                        {user == null ? (<>
                             <Stack.Screen name="Intro" component={IntroApp} />
                             <Stack.Screen name="Login" component={Login} />
                             <Stack.Screen name="Register" component={Register} />
