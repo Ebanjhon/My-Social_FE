@@ -1,12 +1,38 @@
-import { Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, FlatList, Image, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import styles from "./PostStyle";
 import SlideUpView from "./SlideUp";
-import React from "react";
+import React, { useState } from "react";
 import colors from "../../assets/color/colors";
 import icons from '../../assets/iconApp/icons';
+import * as ImagePicker from 'expo-image-picker';
 
 const Post = ({ navigation }) => {
     const [content, setContent] = React.useState('');
+    const [images, setImages] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const pickImages = async () => {
+        setLoading(true);
+        let result = await ImagePicker.launchImageLibraryAsync({
+            allowsMultipleSelection: true,
+            selectionLimit: 10,
+            aspect: [4, 3],
+            quality: 1,
+        })
+
+        if (!result.canceled) {
+            const selectedImages = result.assets || [];
+            setImages(selectedImages);
+        }
+        setLoading(false);
+    };
+
+    const removeImage = (index) => {
+        const updatedImages = [...images];
+        updatedImages.splice(index, 1);  // Xóa phần tử tại vị trí 'index'
+        setImages(updatedImages);  // Cập nhật state
+    };
+
     return (
         <View style={styles.contai_post}>
             <SlideUpView>
@@ -42,10 +68,11 @@ const Post = ({ navigation }) => {
                             placeholder="Hãy nhập nội dung tại đây..."
                         />
                     </View>
+
                     <View style={{ alignItems: 'center' }}>
                         {/* <View style={styles.border_content} /> */}
                         <View style={styles.get_media}>
-                            <TouchableOpacity style={styles.get_media_contain}>
+                            <TouchableOpacity style={styles.get_media_contain} onPress={pickImages}>
                                 <Text style={styles.textv1}>Ảnh/video</Text>
                                 <Image
                                     style={{ width: 35, height: 35, tintColor: colors.xam }}
@@ -60,27 +87,36 @@ const Post = ({ navigation }) => {
                             </TouchableOpacity>
                         </View>
                     </View>
-                    <View style={styles.media_contai}>
-                        <Image
-                            style={styles.media}
-                            source={{ uri: 'https://i.pinimg.com/564x/92/41/dc/9241dcdea1c6b49e2cc5a05f61fd0eeb.jpg' }} />
-                        <TouchableOpacity style={styles.edit_media}>
-                            <Text style={{ fontSize: 18, fontWeight: '700' }}>Edit</Text>
-                            <Image style={{ width: 30, height: 30 }} source={{ uri: icons.edit_img }} />
-                        </TouchableOpacity>
-                    </View>
 
-                    <View style={styles.media_contai}>
-                        <Image
-                            style={styles.media}
-                            source={{ uri: 'https://i.pinimg.com/736x/09/92/0d/09920d7dd3ecb3135c21de3f67fd1390.jpg' }} />
-                        <TouchableOpacity style={styles.edit_media}>
-                            <Text style={{ fontSize: 18, fontWeight: '700' }}>Edit</Text>
-                            <Image style={{ width: 30, height: 30 }} source={{ uri: icons.edit_img }} />
-                        </TouchableOpacity>
-                    </View>
+
+                    <FlatList
+                        style={{ width: '100%', minHeight: 90 }}
+                        data={images}
+                        keyExtractor={(item, index) => index.toString()}  // Đảm bảo mỗi ảnh có key duy nhất
+                        renderItem={({ item, index }) => (
+                            <View style={styles.media_contai}>
+                                <Image
+                                    style={styles.media}
+                                    source={{ uri: item.uri }} />
+                                <TouchableOpacity style={styles.remove} onPress={() => removeImage(index)}>
+                                    <Image style={{ width: 30, height: 30 }} source={{ uri: icons.remove }} />
+                                </TouchableOpacity>
+
+                                <TouchableOpacity style={styles.edit_media}>
+                                    <Text style={{ fontSize: 18, fontWeight: '700' }}>Edit</Text>
+                                    <Image style={{ width: 30, height: 30 }} source={{ uri: icons.edit_img }} />
+                                </TouchableOpacity>
+                            </View>
+                        )}
+                        ListEmptyComponent={
+                            loading && (
+                                <View>
+                                    <Text>Loading...</Text>
+                                </View>)
+                        } />
 
                 </ScrollView>
+
             </SlideUpView >
         </View >
     )

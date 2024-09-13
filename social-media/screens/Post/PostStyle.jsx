@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     media_contai: {
         width: '100%',
         aspectRatio: 3 / 4,
-        backgroundColor: colors.danger,
+        // backgroundColor: colors.danger,
         marginBottom: 10,
         position: 'relative',
     },
@@ -93,6 +93,18 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: '400',
         color: colors.xam
+    },
+    remove: {
+        width: 40,
+        height: 40,
+        backgroundColor: 'rgba(250, 250, 250, 0.4)',
+        position: 'absolute',
+        borderRadius: 50,
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        flexDirection: 'row',
+        right: 10,
+        top: 10,
     }
 
 });
