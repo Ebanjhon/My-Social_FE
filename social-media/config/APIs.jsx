@@ -11,12 +11,17 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // Xóa token
 // await AsyncStorage.removeItem('token');
 
-export const HOST = 'http://192.168.1.14:8080';
+// export const HOST = 'http://localhost:8080';
+// export const HOST = 'http://192.168.1.14:8080';
+export const HOST = 'http://10.0.2.2:8080'; // android studio
+// export const HOST = 'http://127.0.0.1:8080';
 
 export const endpoints = {
     'login': '/api/login',
     'current-user': '/api/users/curent',
     'register': '/api/register',
+    'create-post': '/api/post/create',
+
 
 }
 

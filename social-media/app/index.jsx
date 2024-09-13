@@ -179,7 +179,7 @@ function UserProfile() {
 };
 
 const Index = () => {
-    const [user, useDispatch] = useReducer(UserReducers, null);
+    const [user, dispatch] = useReducer(UserReducers, null);
     // Hàm để lấy dữ liệu từ AsyncStorage và thiết lập state
     const loadUserData = async () => {
         try {
@@ -187,7 +187,7 @@ const Index = () => {
             if (userData) {
                 dispatch({
                     type: 'login',
-                    payload: userResponse.data,
+                    payload: JSON.parse(userData),
                 });
             }
         } catch (error) {
@@ -201,12 +201,12 @@ const Index = () => {
 
     return (
         <NavigationContainer independent={true}>
-            <UserContext.Provider value={[user, useDispatch]}>
+            <UserContext.Provider value={[user, dispatch]}>
                 <TabBarProvider>
                     <Stack.Navigator
                         initialRouteName="Intro"
                         screenOptions={{ headerShown: false }}>
-                        {!user == null ? (<>
+                        {user == null ? (<>
                             <Stack.Screen name="Intro" component={IntroApp} />
                             <Stack.Screen name="Login" component={Login} />
                             <Stack.Screen name="Register" component={Register} />

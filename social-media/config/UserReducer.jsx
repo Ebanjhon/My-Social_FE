@@ -6,9 +6,10 @@ const UserReducer = (user, action) => {
         case "logout": {
             return null;
         }
+        default:
+            return user;
     }
-
-    return user;
+    // return user;
 }
 
 export default UserReducer

@@ -10,6 +10,7 @@ const Logout = ({ navigation }) => {
         const handleLogout = async () => {
             try {
                 await AsyncStorage.removeItem('token');
+                await AsyncStorage.removeItem('user');
                 dispatch({ type: 'logout' });
                 navigation.navigate('Intro');
                 // Thực hiện điều hướng hoặc thông báo đăng xuất thành công nếu cần

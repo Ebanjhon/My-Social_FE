@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
         height: '100%',
         justifyContent: 'flex-end',
         backgroundColor: colors.xamtrang,
+        position: 'relative',
     },
     head_post: {
         display: 'flex',
@@ -32,11 +33,12 @@ const styles = StyleSheet.create({
     content_post: {
         width: '100%',
         maxHeight: 200,
-        borderRadius: 5,
-        borderWidth: 1,
-        borderColor: colors.gold
+        // borderRadius: 5,
+        // borderWidth: 1,
+        // borderColor: colors.gold
     },
     textInput: {
+        fontSize: 16,
         height: "auto",
         padding: 7,
         textAlignVertical: 'top', // Giúp văn bản bắt đầu từ trên cùng
@@ -105,7 +107,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         right: 10,
         top: 10,
-    }
+    },
 
 });
 
