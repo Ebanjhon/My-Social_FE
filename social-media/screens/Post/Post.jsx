@@ -8,7 +8,7 @@ import * as ImagePicker from 'expo-image-picker';
 import UserReducers from '../../config/UserReducer';
 import { authApi, endpoints } from "../../config/APIs";
 import { UserContext } from "../../config/Context";
-
+import Toast from 'react-native-toast-message';
 const Post = ({ navigation }) => {
     const [content, setContent] = React.useState('');
     const [images, setImages] = useState([]);
@@ -40,7 +40,18 @@ const Post = ({ navigation }) => {
     // đăng bài viết
 
     const createPost = async () => {
-        console.log(user.id);
+        // console.log(user.id);
+        try {
+            Toast.show({
+                type: 'success',
+                position: 'bottom',
+                text1: 'Hello',
+                text2: 'This is a toast message',
+            });
+        } catch (error) {
+            console.error('Toast error:', error);
+        }
+
         let formData = new FormData();
 
         // Thêm dữ liệu userId và content vào form

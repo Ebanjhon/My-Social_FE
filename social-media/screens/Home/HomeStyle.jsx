@@ -5,10 +5,6 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         height: '100%',
-        alignItems: 'center',
-        backgroundColor: colors.background,
-        overflow: 'scroll',
-        paddingBottom: 90
     },
     contai_head: {
         width: '100%',
@@ -19,13 +15,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     contain: {
-        width: '96%',
-        alignItems: 'center',
+        minWidth: '95%',
+        maxWidth: '95%',
         backgroundColor: colors.white,
         borderRadius: 20,
         paddingTop: 10,
         elevation: 5,
-        marginBottom: 10
+        marginBottom: 10,
+        //ios
+        shadowColor: '#000',           // Màu bóng
+        shadowOffset: { width: 0, height: 2 }, // Độ lệch của bóng (chiều ngang, chiều dọc)
+        shadowOpacity: 0.25,           // Độ mờ của bóng
+        shadowRadius: 3.84,            // Bán kính của shadow
     },
     txt_post: {
         fontSize: 20,
@@ -50,11 +51,11 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     post_contain: {
-        width: '100%',
-        height: 390,
+        flex: 1,
+        minHeight: 60,
         overflow: 'hidden',
         marginBottom: 10,
-        position: 'relative',
+        // backgroundColor: colors.info,
     },
     media: {
         width: '100%',
@@ -63,50 +64,31 @@ const styles = StyleSheet.create({
     btn_like: {
         width: 50,
         height: 50,
-        position: 'absolute',
-        bottom: 0,
-        right: 25,
         borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center',
-        flexDirection: 'row'
-        // backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        flexDirection: 'row',
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
     },
     btn_cmt: {
-        width: 50,
+        width: 'auto',
         height: 50,
-        position: 'absolute',
-        bottom: 0,
-        left: 15,
         borderRadius: 10,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    },
-    btn_share: {
-        width: 80,
-        height: 50,
-        position: 'absolute',
-        bottom: 0,
-        left: 80,
-        borderRadius: 30,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: colors.white
+        // backgroundColor: 'rgba(255, 255, 255, 0.9)',
     },
     btn_follow: {
-        width: 70,
-        height: 30,
-        backgroundColor: colors.xamtrang,
-        alignItems: 'center',
+        width: 'auto',
+        height: 50,
+        borderRadius: 10,
         justifyContent: 'center',
-        borderRadius: 20,
-        marginLeft: 10
+        alignItems: 'center',
     },
     line_border: {
-        width: '95%',
+        width: '100%',
         borderRadius: 20,
-        borderWidth: 1.2,
+        borderWidth: 1,
         borderColor: colors.xamnhe,
         marginBottom: 10
     },
@@ -115,9 +97,9 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        width: '100%',
+        width: '95%',
         height: 500,
-        backgroundColor: colors.danger
+        // backgroundColor: colors.danger
     },
     imageContainer: {
         justifyContent: 'center',
@@ -130,7 +112,22 @@ const styles = StyleSheet.create({
     },
     contai_image: {
         width: '100%',
+        // marginBottom: 50,
         // backgroundColor: colors.gold
+    },
+    post_infor: {
+        width: '100%',
+        height: 'auto',
+        display: 'flex',
+        flexDirection: 'row',
+        paddingLeft: 10
+    },
+    contain_action: {
+        flex: 1,
+        // position: 'relative',
+        height: 45,
+        flexDirection: 'row',
+        justifyContent: 'space-around'
     }
 });
 
