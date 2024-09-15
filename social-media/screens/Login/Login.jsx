@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { Component, useRef, useState } from 'react'
 import { Alert, Button, KeyboardAvoidingView, Platform, Text, View } from 'react-native'
 import styles from './LoginStyle';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
@@ -6,6 +6,7 @@ import APIs, { apiWithoutAuth, authApi, endpoints } from '../../config/APIs';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useContext } from 'react';
 import { UserContext } from '../../config/Context';
+import FloatingLabelInput from '../../components/FloatingLabelInput';
 
 const Login = ({ navigation }) => {
     const [username, setUsername] = useState('');
@@ -45,26 +46,31 @@ const Login = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Đăng nhập</Text>
+            <Text style={styles.title}>Sign in</Text>
 
-            <TextInput
-                style={styles.input}
-                placeholder="Nhập tên đăng nhập"
-                value={username}
-                onChangeText={setUsername}
-            />
-
-            <TextInput
-                style={styles.input}
-                placeholder="Nhập mật khẩu"
-                secureTextEntry={true}
-                value={password}
-                onChangeText={setPassword}
-            />
+            <View style={{ padding: 16, width: '95%' }}>
+                <FloatingLabelInput
+                    label="Username"
+                    value={username}
+                    setValue={setUsername}
+                    isPassword={false}
+                />
+                <FloatingLabelInput
+                    label="Password"
+                    value={password}
+                    setValue={setPassword}
+                    isPassword={true}
+                />
+            </View>
 
             <TouchableOpacity style={styles.button} onPress={loginPress}>
-                <Text style={styles.buttonText}>Login</Text>
+                <Text style={styles.buttonText}>Đăng Nhập</Text>
             </TouchableOpacity>
+
+            <Button
+                title="Đăng lý tài khoản"
+                onPress={() => navigation.navigate('Register')} // Chuyển đến màn hình Details
+            />
         </View>
     );
 };

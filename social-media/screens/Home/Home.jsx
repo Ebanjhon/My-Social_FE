@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useLayoutEffect, useState } from 'react';
-import { Image, ImageBackground, ScrollView, Text, TouchableOpacity, View, FlatList, StyleSheet, RefreshControl, Alert, ActivityIndicator } from 'react-native'
+import { Image, ImageBackground, ScrollView, Text, TouchableOpacity, View, FlatList, StyleSheet, RefreshControl, Alert, ActivityIndicator, Modal, Button, SafeAreaView, TextInput, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, Dimensions } from 'react-native'
 import colors from '../../assets/color/colors';
 import icons from '../../assets/iconApp/icons';
 import styles from './HomeStyle';
@@ -9,6 +9,8 @@ import { useTabBar } from '../../config/TabBarContext';
 import { UserContext } from '../../config/Context';
 import { authApi, endpoints } from '../../config/APIs';
 
+
+
 const Home = () => {
     const [refreshing, setRefreshing] = useState(false);
     const { state, dispatch } = useTabBar();
@@ -16,6 +18,13 @@ const Home = () => {
     const [user, dispatchUser] = useContext(UserContext);
     const [page, setPage] = useState(0);
     const [loading, setLoading] = useState(false); // Trạng thái tải dữ liệu
+    const [modalVisible, setModalVisible] = useState(false);
+    const [comment, setComment] = useState('');
+    const [repname, setRepname] = useState('');
+    const [idCommentParent, setIdCommentParent] = useState(0);
+    const [postId, setPostId] = useState(0);
+    const [commentList, setCommentList] = useState([]);
+
 
     const hideTabBar = () => {
         dispatch({ type: 'HIDE_TAB_BAR' });
@@ -46,6 +55,18 @@ const Home = () => {
     const addPost = (newPost) => {
         setPosts((prevPosts) => [...prevPosts, ...newPost]);
     };
+    // hàm format date
+    function convertDateTime(dateTimeStr) {
+        const dateTime = new Date(dateTimeStr);
+        const hours = String(dateTime.getHours()).padStart(2, '0');
+        const minutes = String(dateTime.getMinutes()).padStart(2, '0');
+        const day = String(dateTime.getDate()).padStart(2, '0');
+        const month = String(dateTime.getMonth() + 1).padStart(2, '0'); // Tháng bắt đầu từ 0
+        const year = dateTime.getFullYear();
+
+        return `${hours}:${minutes} ${day}-${month}-${year}`;
+    }
+
 
     // hàm cuộn từ dưới lên
     const loadMorePosts = () => {
@@ -75,11 +96,26 @@ const Home = () => {
         return formattedDate;
     };
 
+    // gọi ham popup
+    const popup = (idPost) => {
+        setCommentList([]);
+        setModalVisible(true);
+        setPostId(idPost);
+        // setComment("");
+        fetchComment();
+    };
+
+    const unpop = () => {
+        setCommentList([]);
+        setComment("");
+        setModalVisible(false);
+        setPostId(0);
+    };
     // gọi api lấy dữ liệu
     const loadPost = async () => {
         const api = await authApi();
-        const response = await api.get(endpoints['loadPost'](user.id, page));
 
+        const response = await api.get(endpoints['loadPost'](user.id, page));
         if (response.status === 200) {
             addPost(response.data.content);
             setPage(page + 1);
@@ -93,15 +129,214 @@ const Home = () => {
             setLoading(false);
         }
     };
-
     // khoi tạo hook chay dau tien
-
     useEffect(() => {
         loadPost();
     }, [])
 
+    // hàm tạo comment
+    const createCmt = async () => {
+        if (comment.length === 0)
+            return;
+        const commentData = {
+            idUser: user.id,
+            idCmtParent: idCommentParent,
+            idPost: postId,
+            content: comment,
+        };
+        console.log(commentData);
+
+        const api = await authApi();
+
+        try {
+            const response = await api.post(endpoints['create-comment'], commentData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log(response.data);
+            setComment("");
+            fetchComment();
+            setIdCommentParent(0);
+        } catch (error) {
+            console.error('Error creating post:', error);
+            throw error;
+        }
+    };
+
+    // hàm fetch bình luận
+    const fetchComment = async () => {
+        if (postId === 0)
+            return;
+        const api = await authApi();
+        try {
+            console.log("post:" + postId)
+            const response = await api.get(endpoints['load-comments'](postId));
+            // Kiểm tra nếu API trả về thành công
+            if (response.status === 200) {
+                setCommentList(response.data); // Cập nhật dữ liệu bình luận
+                // console.log('Comments:', response.data);
+            }
+        } catch (error) {
+            console.error('Error creating post:', error);
+            throw error;
+        }
+    };
+
+    useEffect(() => {
+        fetchComment();
+    }, [postId]);  // Chỉ gọi lại API khi `postId` thay đổi
+
+    // trả lời bình luận
+    const reply = (item) => {
+        setIdCommentParent(item.idComment);
+        setRepname(item.firstname + item.lastname);
+        console.log(item.commentChild);
+    };
+
+    useEffect(() => {
+    }, [idCommentParent]);
+
+    const renderComment = ({ item }) => (
+        <View style={{ width: '100%', minHeight: 70, flexDirection: 'row' }}>
+            <Image
+                style={{ width: 50, height: 50, borderRadius: 50, margin: 5 }}
+                // source={{ uri: 'https://i.pinimg.com/564x/83/4a/d9/834ad9f6c5f2fca8ffa63acfbd274f38.jpg' }}
+                source={{
+                    uri: item.avatar === ""
+                        ? 'https://i.pinimg.com/564x/25/ee/de/25eedef494e9b4ce02b14990c9b5db2d.jpg'
+                        : item.avatar
+                }}
+            />
+            <View style={{ minHeight: 40, paddingRight: 9, width: Dimensions.get('window').width * 0.95 - 50 }}>
+                <View style={{ paddingRight: 9 }}>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={{ fontSize: 15, fontWeight: '600' }}>{item.firstname} {item.lastname}</Text>
+                        <Text style={{ fontSize: 14, fontWeight: '400', marginLeft: 10 }}>{convertDateTime(item.commentDate)}</Text></View>
+                </View>
+                <Text style={{ minHeight: 20 }}>{item.comment}</Text>
+                <View style={{ width: '100%', minHeight: 30, flexDirection: 'row', paddingTop: 2, justifyContent: 'space-between' }}>
+                    <TouchableOpacity
+                        onPress={() => reply(item)}>
+                        <Text style={{ fontSize: 17, fontWeight: '500', color: colors.gray }}>Trả lời</Text>
+                    </TouchableOpacity>
+                    <Text style={{ fontSize: 17, fontWeight: '500', color: colors.gray, marginRight: 5, color: colors.danger }}>Xóa</Text>
+                    {/* <Image /> */}
+                </View>
+                {/* // bình luận con */}
+                <FlatList
+                    data={item.commentChild}
+                    keyExtractor={(child) => child.idComment.toString()}
+                    nestedScrollEnabled={true}
+                    renderItem={({ item: child }) => (
+                        <View style={{ width: 'auto', minHeight: 70, flexDirection: 'row' }}>
+                            <Image
+                                style={{ width: 50, height: 50, borderRadius: 50, margin: 5 }}
+                                source={{
+                                    uri: item.avatar === ""
+                                        ? 'https://i.pinimg.com/564x/25/ee/de/25eedef494e9b4ce02b14990c9b5db2d.jpg'
+                                        : item.avatar
+                                }}
+                            />
+                            <View style={{ minHeight: 40, paddingRight: 9, width: Dimensions.get('window').width * 0.8 - 50 }}>
+                                <View style={{ paddingRight: 9 }}>
+                                    <View style={{ flexDirection: 'row' }}>
+                                        <Text style={{ fontSize: 15, fontWeight: '600' }}>{child.firstname} {child.lastname}</Text>
+                                        <Text style={{ fontSize: 14, fontWeight: '400', marginLeft: 10 }}>{convertDateTime(child.commentDate)}</Text></View>
+                                </View>
+                                <Text style={{ minHeight: 20 }}>{child.comment}</Text>
+                                <View style={{ width: 'auto', minHeight: 30, flexDirection: 'row', paddingTop: 2, justifyContent: 'space-between' }}>
+                                    <Text></Text>
+                                    <Text style={{ fontSize: 17, fontWeight: '500', color: colors.gray, marginRight: 15, color: colors.danger }}>Xóa</Text>
+                                    {/* <Image /> */}
+                                </View>
+                            </View>
+                        </View>
+                    )}
+                    style={{ paddingLeft: 0 }}
+                />
+
+            </View>
+        </View>
+    );
+
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
+            <Modal
+                animationType="slide" // Kiểu hiển thị (slide, fade, none)
+                transparent={true}    // Modal có nền trong suốt hay không
+                visible={modalVisible} // Điều khiển việc hiển thị modal
+                onRequestClose={() => { // Điều gì xảy ra khi modal bị đóng
+                    setModalVisible(false);
+                }}>
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                    <KeyboardAvoidingView
+                        keyboardVerticalOffset={0}
+                        behavior={Platform.OS === "ios" ? "padding" : "height"}>
+                        <View style={styles.contai_popup} onPress={() => setModalVisible(false)}>
+                            <TouchableOpacity
+                                onPress={unpop} // Nút đóng modal
+                            >
+                                <View style={{ width: '100%', height: '25%' }}></View>
+                            </TouchableOpacity>
+
+                            <View style={styles.contain_cmt_view}>
+                                <Text style={{ fontSize: 19, fontWeight: '600' }}>Comment</Text>
+                                <View style={{ width: '95%', borderWidth: 0.7, borderColor: colors.gray, marginBottom: 1 }} />
+
+                                <View style={styles.contain_list_cmt}>
+                                    {/* // hieenr thij binhf lunan */}
+
+                                    <FlatList
+                                        data={commentList}
+                                        keyExtractor={(item) => item.idComment.toString()}
+                                        renderItem={renderComment}
+                                        nestedScrollEnabled={true}
+                                        ListEmptyComponent={<Text>Chưa có bình luận!</Text>}
+                                        style={{ flex: 1 }}
+                                    />
+
+                                </View>
+
+                                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                                    <View style={styles.input_cmt}>
+                                        <TextInput
+                                            value={comment}
+                                            onChangeText={setComment}
+                                            placeholder="Type comment here..."
+                                            style={styles.textInput} />
+                                        <TouchableOpacity
+                                            onPress={createCmt}
+                                            style={{ backgroundColor: colors.xamtrang, width: 40, height: 40, borderRadius: 30, justifyContent: 'center', alignItems: 'center' }}>
+                                            <Image
+                                                style={{ width: 30, height: 30, transform: [{ rotate: '270deg' }], top: -1 }}
+                                                source={{ uri: icons.send_cmt }} />
+                                        </TouchableOpacity>
+
+                                        {idCommentParent !== 0 &&
+                                            <View style={styles.reply}>
+                                                <Text style={{ fontSize: 17, fontWeight: '700', color: colors.dark }}>Trả lời:</Text>
+                                                <Text style={{ fontSize: 16, fontWeight: '400', color: colors.dark, paddingLeft: 5 }}>@{repname}</Text>
+                                                <TouchableOpacity onPress={() => setIdCommentParent(0)}>
+                                                    <Image
+                                                        style={{ width: 20, height: 20, marginLeft: 10 }}
+                                                        source={{ uri: icons.remove }}
+                                                    />
+                                                </TouchableOpacity>
+                                            </View>
+                                        }
+
+
+
+                                    </View>
+                                </TouchableWithoutFeedback>
+
+                            </View>
+                        </View>
+                    </KeyboardAvoidingView>
+                </TouchableWithoutFeedback>
+            </Modal>
+
             <FlatList
                 data={posts}
                 showsVerticalScrollIndicator={false}  // Tắt thanh cuộn dọc
@@ -152,7 +387,6 @@ const Home = () => {
                                 <FlatList
                                     data={item.medias}
                                     renderItem={renderItem}
-                                    keyExtractor={item => item.id}
                                     horizontal
                                     showsHorizontalScrollIndicator={false}
 
@@ -166,10 +400,14 @@ const Home = () => {
                                 <TouchableOpacity
                                     style={styles.btn_follow}
                                     activeOpacity={0.3}>
-                                    <Text style={{ fontSize: 18, fontWeight: '600', color: colors.info }}>Folow</Text>
+
+                                    <Text style={{ fontSize: 18, fontWeight: '600', color: colors.info }}>
+                                        {item.following ? 'Following' : 'Follow'}
+                                    </Text>
                                 </TouchableOpacity>
 
                                 <TouchableOpacity
+                                    onPress={() => popup(item.idPost)}
                                     activeOpacity={0.3}
                                     style={styles.btn_cmt}>
                                     <Text style={{ fontSize: 18, fontWeight: '600', color: colors.info }}>Comment</Text>
@@ -197,7 +435,7 @@ const Home = () => {
                                     source={{ uri: icons.add_icon }} />
                             </View>
                             <View>
-                                <Text style={styles.logo}>BanaNo</Text>
+                                <Text style={styles.logo}>MySunsine</Text>
                             </View>
                             <View style={styles.message}>
                                 <Image style={{ width: 40, height: 40 }}
@@ -214,7 +452,7 @@ const Home = () => {
                     paddingBottom: 90
                 }}
             />
-        </View>
+        </SafeAreaView>
     );
 };
 

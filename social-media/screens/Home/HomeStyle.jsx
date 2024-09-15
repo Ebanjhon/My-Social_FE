@@ -128,7 +128,80 @@ const styles = StyleSheet.create({
         height: 45,
         flexDirection: 'row',
         justifyContent: 'space-around'
+    },
+    contai_popup: {
+        // backgroundColor: colors.danger,
+        height: '100%',
+    },
+    contain_cmt_view: {
+        width: '100%',
+        height: '75%',
+        backgroundColor: colors.xamtrang,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        padding: 5,
+        alignItems: 'center',
+        position: 'relative',
+    },
+    contain_Input: {
+        position: 'absolute',
+        bottom: 0,
+        // backgroundColor: colors.danger,
+        height: 50,
+        width: '95%',
+    },
+    contain_list_cmt: {
+        width: '100%',
+        flex: 1,
+        alignItems: 'center',
+        alignContent: 'center',
+        paddingBottom: 50,
+        // backgroundColor: colors.danger,
+
+    },
+    input_cmt: {
+        flex: 1,
+        width: '100%',
+        height: 50,
+        backgroundColor: colors.white,
+        alignItems: 'center',
+        position: 'absolute',
+        bottom: 0,
+        paddingLeft: 15,
+        paddingRight: 5,
+        borderRadius: 30,
+        flexDirection: 'row',
+        marginBottom: 5,
+        // Shadow for iOS
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.4,
+        shadowRadius: 2,
+        // Shadow for Android
+        elevation: 5,
+        justifyContent: 'flex-start'
+    },
+    textInput: {
+        flex: 1,
+        width: '88%',
+        fontSize: 20,
+        color: colors.dark
+    },
+    reply: {
+        width: 'auto',
+        height: 40,
+        backgroundColor: colors.gold,
+        position: 'absolute',
+        bottom: 55,
+        borderRadius: 50,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        paddingLeft: 20,
+        flexDirection: 'row',
+        paddingRight: 10,
+
     }
+
 });
 
 export default styles;

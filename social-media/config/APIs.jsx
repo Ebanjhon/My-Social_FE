@@ -12,7 +12,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 // await AsyncStorage.removeItem('token');
 
 // export const HOST = 'http://localhost:8080';
-export const HOST = 'http://192.168.1.23:8080'; //  IPv4 Address ios lỗi thì cú chạy lại 
+export const HOST = 'http://192.168.1.26:8080'; //  IPv4 Address ios lỗi thì cú chạy lại 
 // export const HOST = 'http://10.0.2.2:8080'; // android studio
 // export const HOST = 'http://127.0.0.1:8080';
 
@@ -21,7 +21,10 @@ export const endpoints = {
     'current-user': '/api/users/curent',
     'register': '/api/register',
     'create-post': '/api/post/create',
-    'loadPost': (currentUserId, page) => `/api/post?currentUserId=${currentUserId}&page=${page}`
+    'loadPost': (currentUserId, page) => `/api/post?currentUserId=${currentUserId}&page=${page}`,
+    'create-comment': '/api/comment',
+    'load-comments': (postId) => `/api/comment/post/${postId}`,
+
 
 }
 

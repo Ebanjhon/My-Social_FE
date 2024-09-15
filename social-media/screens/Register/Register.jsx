@@ -195,7 +195,7 @@ const Register = ({ navigation }) => {
                 style={styles.background}>
 
                 <View style={styles.container}>
-                    <Text style={styles.logo}>Ayang loh</Text>
+                    <Text style={styles.logo}>Register</Text>
                     <Text style={styles.text}>{displayText}</Text>
                 </View>
                 <View style={styles.contai_form}>
@@ -393,16 +393,15 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         width: '100%',
-        height: 50,
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 30,
-        marginTop: 50,
+        marginTop: 10,
     },
     logo: {
         fontSize: 43,
         color: colors.gold,
-        fontWeight: '900'
+        fontWeight: '900',
     },
     text: {
         fontSize: 18,
